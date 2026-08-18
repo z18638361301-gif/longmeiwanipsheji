@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="龙美岩信——一封穿越台湾海峡的当代侨批。写下家书、化舟过海，让思念成为龙美湾永久留存的石纹。"
+    />
+    <meta name="theme-color" content="#153f43" />
+    <title>龙美岩信 · 一封穿海而行的当代侨批</title>
+    <link rel="stylesheet" href="styles.css?v=20260818c" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="museum-cursor" id="museumCursor" aria-hidden="true"><i></i><span>探索</span></div>
+    <audio id="backgroundMusic" src="assets/longmei-background-music.mp3" preload="auto" autoplay playsinline loop></audio>
+
+    <section class="welcome" id="welcome" aria-label="海浪信使诞生与漳浦打卡动画">
+      <div class="welcome__image" aria-hidden="true"></div>
+      <div class="welcome__mist welcome__mist--one" aria-hidden="true"></div>
+      <div class="welcome__mist welcome__mist--two" aria-hidden="true"></div>
+      <div class="welcome__topline">
+        <span>漳浦 · 龙美湾</span>
+        <span>IP BIRTH FILM / 24.3°N · 118.1°E</span>
+      </div>
+
+      <div class="welcome-story">
+        <div class="welcome-story__copy">
+          <p class="eyebrow light">A MESSENGER BORN OF THE SEA</p>
+          <div class="welcome-story__chapter"><span id="welcomeStoryIndex">01</span><i></i><b id="welcomeStoryKicker">信使诞生</b></div>
+          <h1 id="welcomeStoryTitle">海风有了形状<br /><em>乡音有了信使</em></h1>
+          <p class="welcome__lead" id="welcomeStoryCopy">纸舟为冠，海浪为发。海浪信使从漳浦的历史与潮声中醒来，带着没有边界的牵挂，踏上沿海打卡之旅。</p>
+          <div class="welcome-stamps" aria-label="漳浦景点打卡进度">
+            <button class="is-earned" type="button" data-stamp="0" aria-label="查看漳浦古城纪念章">浦</button>
+            <button type="button" data-stamp="1" aria-label="查看火山岛纪念章">岛</button>
+            <button type="button" data-stamp="2" aria-label="查看六鳌翡翠湾纪念章">滩</button>
+            <button type="button" data-stamp="3" aria-label="查看龙美湾纪念章">湾</button>
+            <small><b id="welcomeStampCount">1</b> / 4 枚纪念章</small>
+          </div>
+          <button class="primary-button welcome__enter" id="enterExperience">
+            <span>进入龙美湾 · 与岩笺会合</span>
+            <i aria-hidden="true">↗</i>
+          </button>
+        </div>
+
+        <div class="welcome-map" aria-label="漳浦沿海打卡路线">
+          <span class="welcome-map__label">ZHANGPU COASTAL ROUTE</span>
+          <svg viewBox="0 0 720 420" aria-hidden="true">
+            <path class="welcome-map__coast" d="M38 348C118 280 129 220 213 232S311 322 392 262s76-140 166-126 89 72 136 30" />
+            <path class="welcome-map__route" d="M92 312C176 270 205 180 304 231S433 307 503 212s98-90 145-60" />
+          </svg>
+          <button class="welcome-stop is-current is-earned" data-stop="0" style="--x: 13%; --y: 74%"><i>01</i><b>漳浦古城</b><small>千年文脉</small></button>
+          <button class="welcome-stop" data-stop="1" style="--x: 41%; --y: 55%"><i>02</i><b>火山岛</b><small>海蚀地貌</small></button>
+          <button class="welcome-stop" data-stop="2" style="--x: 70%; --y: 48%"><i>03</i><b>六鳌翡翠湾</b><small>金色沙滩</small></button>
+          <button class="welcome-stop" data-stop="3" style="--x: 89%; --y: 30%"><i>04</i><b>龙美湾</b><small>双IP会合</small></button>
+          <span class="welcome-map__pulse" aria-hidden="true"></span>
+        </div>
+
+        <figure class="welcome-mascot welcome-mascot--messenger">
+          <img src="assets/ip-messenger-v2.webp" alt="海浪信使IP" fetchpriority="high" decoding="async" />
+          <figcaption><b>海浪信使</b><span>纸舟为冠 · 海浪为发</span></figcaption>
+        </figure>
+        <figure class="welcome-mascot welcome-mascot--rockletter">
+          <img src="assets/ip-rockletter-v2-optimized.png" alt="岩笺IP" loading="lazy" decoding="async" />
+          <figcaption><b>岩笺</b><span>石纹成字 · 等风来信</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="welcome-progress" aria-label="片头加载进度"><span id="welcomeProgressBar"></span><small id="welcomeProgressText">打卡路线加载 25%</small></div>
+      <button class="welcome__skip" id="skipWelcome">跳过打卡动画</button>
+    </section>
+
+    <section class="activity-hub" id="activityHub" aria-hidden="true">
+      <div class="activity-hub__scene" aria-hidden="true"><i></i><i></i><i></i></div>
+      <header class="hub-header">
+        <a class="hub-brand" href="#"><span>龍</span><b>龙美湾 · 闽台之滨</b><small>山海相连 · 文脉相牵</small></a>
+        <nav aria-label="网站主导航">
+          <button class="is-active" type="button">导航 1 · 龙美湾漫游</button>
+          <button id="hubLetterNav" type="button">导航 2 · 闽台岩信</button>
+        </nav>
+        <button class="hub-music" id="hubMusicToggle" type="button">♪ <span>龙美湾 · 背景乐</span></button>
+      </header>
+
+      <div class="hub-scene-note"><span id="hubSceneIndex">01</span><b id="hubSceneLabel">日出金海</b><i></i><small>3—5 秒欢迎动画</small></div>
+      <div class="discovery-modes" aria-label="选择浏览方式">
+        <span>选择你的浏览方式</span>
+        <button type="button" data-discovery-mode="explorer"><i>○</i><b>探索者</b><small>随机发现</small></button>
+        <button type="button" data-discovery-mode="searcher"><i>⌕</i><b>搜索者</b><small>寻找岩信</small></button>
+        <button type="button" data-discovery-mode="navigator"><i>→</i><b>导航者</b><small>沿路线前行</small></button>
+      </div>
+      <div class="hub-hero">
+        <div class="hub-hero__copy">
+          <p class="eyebrow light">TWO MASCOTS · ONE COAST</p>
+          <h1>跟着海浪信使<br />去龙美湾<em>赶一场海</em></h1>
+          <p>从日出金海到岩蚀画廊，双IP陪你饲养孔雀、辨认石画、拾取潮间带记忆；最后，把一封闽台家书交给海风。</p>
+          <div class="hub-route-summary"><span>漳浦古城</span><i></i><span>火山岛</span><i></i><span>六鳌</span><i></i><span>龙美湾</span></div>
+        </div>
+        <div class="hub-duo" aria-label="海浪信使与岩笺">
+          <figure class="hub-duo__messenger"><img src="assets/ip-messenger-v2.webp" alt="海浪信使" loading="lazy" decoding="async" /><figcaption>海浪信使<small>沿海打卡向导</small></figcaption></figure>
+          <figure class="hub-duo__rockletter"><img src="assets/ip-rockletter-v2-optimized.png" alt="岩笺" loading="lazy" decoding="async" /><figcaption>岩笺<small>闽台家书伙伴</small></figcaption></figure>
+          <span class="hub-duo__speech" id="hubMascotSpeech">下一站，龙美湾！</span>
+        </div>
+      </div>
+
+      <div class="activity-dock" aria-label="龙美湾互动活动">
+        <button data-activity="map"><span>01</span><i>沿海打卡图</i><b>四枚纪念章</b><small>展开路线 ↗</small></button>
+        <button data-activity="peacock"><span>02</span><i>双IP饲养孔雀</i><b>轻触投喂谷粒</b><small>开始互动 ↗</small></button>
+        <button data-activity="gallery"><span>03</span><i>岩蚀画廊猜画</i><b>猜中进入导航2</b><small>辨认石纹 ↗</small></button>
+        <button data-activity="tide"><span>04</span><i>双IP赶海</i><b>收集潮间记忆</b><small>开始赶海 ↗</small></button>
+        <button class="activity-dock__letter" id="openLetterExperience"><span>→</span><i>线上寄信</i><b>重点了解闽台信笺文化</b><small>进入导航 2</small></button>
+      </div>
+    </section>
+
+    <div class="activity-modal" id="activityModal" aria-hidden="true">
+      <button class="activity-modal__backdrop" data-close-activity aria-label="关闭活动"></button>
+      <section class="activity-dialog" role="dialog" aria-modal="true" aria-labelledby="activityTitle">
+        <button class="activity-dialog__close" data-close-activity aria-label="关闭">×</button>
+        <div class="activity-dialog__head"><span>LONGMEI BAY FIELD NOTES</span><h2 id="activityTitle">龙美湾活动</h2><p id="activitySubtitle">双IP陪你读取山海留下的线索</p></div>
+
+        <article class="activity-panel activity-panel--map" data-activity-panel="map">
+          <div class="route-journal">
+            <ol>
+              <li class="is-done"><i>浦</i><div><b>漳浦古城</b><small>千年海防与闽南文脉</small></div><span>纪念章 01</span></li>
+              <li class="is-done"><i>岛</i><div><b>火山岛</b><small>玄武岩写下海蚀年轮</small></div><span>纪念章 02</span></li>
+              <li class="is-done"><i>滩</i><div><b>六鳌翡翠湾</b><small>金色西沙与海风相遇</small></div><span>纪念章 03</span></li>
+              <li class="is-done"><i>湾</i><div><b>龙美湾</b><small>双IP会合，开启闽台家书</small></div><span>纪念章 04</span></li>
+            </ol>
+            <div class="route-journal__stamp">漳浦沿海<br /><b>全线达成</b></div>
+          </div>
+        </article>
+
+        <article class="activity-panel activity-panel--peacock" data-activity-panel="peacock" hidden>
+          <div class="peacock-stage"><div class="peacock" aria-label="孔雀"><i></i><i></i><i></i><i></i><i></i><b></b></div><span id="peacockMood">孔雀正在等一把谷粒</span></div>
+          <div class="activity-mascot-pair"><img src="assets/ip-messenger-v2.webp" alt="海浪信使" loading="lazy" decoding="async" /><img src="assets/ip-rockletter-v2-optimized.png" alt="岩笺" loading="lazy" decoding="async" /></div>
+          <div class="activity-task"><b>今日投喂 <span id="feedCount">0</span> / 3</b><p>每次投喂，双IP都会换一个表情回应你。</p><button class="primary-button" id="feedPeacock" type="button"><span>投喂一把谷粒</span><i>＋</i></button></div>
+        </article>
+
+        <article class="activity-panel activity-panel--gallery" data-activity-panel="gallery" hidden>
+          <div class="rock-riddle"><span>岩蚀画廊 · 第 07 号石画</span><div class="rock-riddle__drawing"><i></i><i></i><i></i></div><b>潮水雕出的轮廓，最像什么？</b></div>
+          <div class="riddle-options"><button data-riddle="wave">海浪</button><button data-riddle="bird">展翅海鸟</button><button data-riddle="boat">远航帆船</button></div>
+          <p class="activity-feedback" id="riddleFeedback">观察石纹的两翼与中央脊线，再作答。</p>
+          <button class="outline-button activity-next-letter" id="riddleToLetter" type="button" hidden>猜中了 · 进入导航 2 写一封信 →</button>
+        </article>
+
+        <article class="activity-panel activity-panel--tide" data-activity-panel="tide" hidden>
+          <div class="tide-pool" id="tidePool" aria-label="潮间带拾取区">
+            <button style="--x:16%;--y:62%" data-tide-item="贝壳">贝</button><button style="--x:38%;--y:35%" data-tide-item="石花">花</button><button style="--x:63%;--y:69%" data-tide-item="海螺">螺</button><button style="--x:82%;--y:28%" data-tide-item="漂流信笺">信</button>
+            <span class="tide-pool__wave"></span>
+          </div>
+          <div class="activity-task"><b>潮间记忆 <span id="tideCount">0</span> / 4</b><p id="tideHint">赶在潮水回来前，点亮四件海边小物。</p><button class="outline-button" id="resetTide" type="button">重新赶海</button></div>
+        </article>
+      </section>
+    </div>
+
+    <div class="app-shell" id="appShell" aria-hidden="true">
+      <header class="site-header">
+        <a class="brand" href="#write" aria-label="龙美岩信首页">
+          <span class="brand__seal">龍</span>
+          <span>
+            <b>龙美岩信</b>
+            <small>当代侨批 · 云上家书</small>
+          </span>
+        </a>
+
+        <nav class="stage-nav" aria-label="体验流程">
+          <button class="stage-nav__item is-active" data-stage="write">
+            <span>壹</span>落笔成信
+          </button>
+          <i></i>
+          <button class="stage-nav__item" data-stage="sail">
+            <span>贰</span>驭舟过海
+          </button>
+          <i></i>
+          <button class="stage-nav__item" data-stage="wall">
+            <span>叁</span>岩壁留存
+          </button>
+        </nav>
+
+        <div class="header-actions">
+          <button class="gallery-trigger" id="myGalleryButton" type="button" aria-label="打开我的家书盒">
+            <span>▱</span><b>我的家书盒</b><small id="galleryCount">0</small>
+          </button>
+          <button class="music-control" id="musicToggle" type="button" aria-pressed="false" aria-label="播放龙美湾背景音乐">
+            <span class="music-control__disc" aria-hidden="true"><i></i></span>
+            <span class="music-control__copy"><b>龙美湾 · 背景乐</b><small id="musicStatus">点击播放音乐</small></span>
+            <span class="music-control__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+          <div class="header-meta">
+            <span class="live-dot"></span>
+            <span><b id="letterCount">2,368</b><small>封岩信已启程</small></span>
+          </div>
+        </div>
+      </header>
+
+      <button class="return-activities" id="returnActivities" type="button"><span>←</span><b>返回导航 1</b><small>继续赶海</small></button>
+
+      <main class="scroll-world" id="scrollWorld">
+        <section class="world-panel write-panel" id="write" data-stage="write">
+          <div class="stone-scroll stone-scroll--left" aria-hidden="true"></div>
+          <div class="write-intro">
+            <p class="eyebrow">LETTER FROM THE ROCK</p>
+            <p class="chapter-no">壹</p>
+            <h2>风从海上来<br />字从心上落</h2>
+            <p class="intro-copy">
+              旧时侨批，越海寄乡愁；今日岩信，让牵挂在龙美湾找到新的抵达方式。
+            </p>
+            <div class="memory-note">
+              <span class="memory-note__mark">批</span>
+              <p><b>侨批</b>，是华侨寄回故乡的家书与汇款凭证。一纸轻薄，承载的是跨海的生计、承诺与思念。</p>
+            </div>
+            <div class="drag-cue">
+              <span>←</span>
+              <p>横向滑动石纹长卷<br /><small>或使用顶部章节导航</small></p>
+              <span>→</span>
+            </div>
+          </div>
+
+          <div class="letter-stage">
+            <div class="letter-shadow" aria-hidden="true"></div>
+            <article class="letter-paper" id="letterPaper">
+              <div class="paper-corner paper-corner--tl" aria-hidden="true"></div>
+              <div class="paper-corner paper-corner--br" aria-hidden="true"></div>
+              <div class="qiaopi-ribbon" aria-hidden="true">
+                <small>泉州府龍美灣寄</small>
+                <b id="recipientRibbon">親啟</b>
+                <span>龍美岩信局代封</span>
+              </div>
+              <div class="paper-head">
+                <div class="silver-letter-office">
+                  <span class="office-seal">龍美</span>
+                  <div>
+                    <span class="paper-kicker">QUANZHOU · QIAOPI</span>
+                    <h3>龍美岩信局</h3>
+                    <small>龍美灣雲寄分局 · 當代家書</small>
+                  </div>
+                </div>
+                <div class="postmark" aria-label="泉州龙美湾数字邮戳">
+                  <span>泉州</span>
+                  <small>龍美岩信</small>
+                  <i>丙午</i>
+                </div>
+              </div>
+
+              <form id="letterForm" novalidate>
+                <div class="format-note">
+                  <span>泉州銀信式</span>
+                  <p>右起直書 · 折痕分欄 · 見字如面</p>
+                </div>
+                <div class="letter-fields">
+                  <label>
+                    <span>寄信人 / 款</span>
+                    <input id="senderName" name="sender" maxlength="12" placeholder="你的名字" autocomplete="name" />
+                  </label>
+                  <label>
+                    <span>收信人 / 啟</span>
+                    <input id="recipient" name="recipient" maxlength="16" placeholder="想念的人 / 一座城" />
+                  </label>
+                </div>
+
+                <div class="phrase-bar">
+                  <span>侨批常用语</span>
+                  <button type="button" data-phrase="见字如面，愿你近来安好。">见字如面</button>
+                  <button type="button" data-phrase="家中一切安好，毋须挂念。">毋须挂念</button>
+                  <button type="button" data-phrase="伏望珍重，盼早日团圆。">伏望珍重</button>
+                  <button type="button" class="phrase-more" id="morePhrases" aria-expanded="false">＋</button>
+                  <button type="button" class="qiaopi-scribe" id="qiaopiScribe"><i>批</i><b>侨批先生代书</b><small>白话润成侨批书面语</small></button>
+                </div>
+
+                <div class="scribe-status" id="scribeStatus" role="status" aria-live="polite"><span></span><b>代书先生候笔</b><small>先写下一段白话，再请先生润笔</small></div>
+
+                <div class="phrase-popover" id="phrasePopover" hidden>
+                  <button type="button" data-phrase="家中一切都好，勿念。">家中一切都好，勿念。</button>
+                  <button type="button" data-phrase="千言万语，只愿你平安顺遂。">只愿你平安顺遂。</button>
+                  <button type="button" data-phrase="待到潮平，我们在故乡重逢。">故乡重逢。</button>
+                </div>
+
+                <div class="qiaopi-sheet">
+                  <div class="vertical-signature" aria-hidden="true">
+                    <small>歲在丙午</small>
+                    <b id="senderPreview">寄信人</b>
+                    <span>謹上</span>
+                  </div>
+                  <div class="message-wrap">
+                    <textarea
+                      id="letterMessage"
+                      name="message"
+                      maxlength="180"
+                      placeholder="自右起，写下想说却还没说的话……"
+                      aria-label="竖排家书内容"
+                    ></textarea>
+                    <span class="ink-cursor" aria-hidden="true"></span>
+                    <span class="word-count"><b id="wordCount">0</b> / 180 字</span>
+                  </div>
+                  <div class="vertical-salutation" aria-hidden="true">
+                    <b id="recipientPreview">海那邊的你</b>
+                    <span>尊前</span>
+                    <small>敬啟者</small>
+                  </div>
+                </div>
+
+                <div class="letter-signoff">
+                  <span>龍美岩信局 · 泉州龍美灣</span>
+                  <div class="privacy-switch">
+                    <div>
+                      <b id="privacyTitle">公开岩信</b>
+                      <small id="privacyHint">抵岸后留在公共岩壁</small>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="secretToggle" />
+                      <span></span>
+                    </label>
+                  </div>
+                </div>
+
+                <button class="send-button" id="sendLetter" type="submit">
+                  <span>封缄寄出</span>
+                  <i aria-hidden="true">
+                    <svg viewBox="0 0 64 28" fill="none">
+                      <path d="M2 19c14 0 20-9 30-9s14 5 30 5" />
+                      <path d="m48 6 14 9-14 7" />
+                    </svg>
+                  </i>
+                </button>
+              </form>
+            </article>
+            <p class="paper-footnote"><span>○</span> 每一封公开岩信，都可能成为下一枚文创盲盒里的当代侨批</p>
+          </div>
+        </section>
+
+        <section class="world-panel sail-panel" id="sail" data-stage="sail">
+          <div class="sail-copy">
+            <p class="eyebrow light">CROSS THE STRAIT</p>
+            <p class="chapter-no chapter-no--light">贰</p>
+            <h2>以风作帆<br />渡一程海峡</h2>
+            <p>移动鼠标或手指掌舵，避开海浪与暗礁；集齐三枚乡音印，可点亮一次护舟灯。按住鼓帆加速，把游子的家书送往海峡彼岸。</p>
+            <div class="legend">
+              <span><i class="legend__wind"></i>乡音印 · 集齐两枚抵岸</span>
+              <span><i class="legend__wave"></i>海浪 · 减速</span>
+              <span><i class="legend__rock"></i>礁石 · 避让</span>
+            </div>
+            <button class="outline-button light-button" id="startVoyage">开始护送岩信 <span>→</span></button>
+          </div>
+
+          <div class="sea-stage">
+            <div class="sea-stage__topbar">
+              <div>
+                <span>福建 · 龙美湾</span>
+                <i></i>
+                <span>台湾海峡彼岸</span>
+              </div>
+              <span class="sea-status" id="seaStatus">等待启程</span>
+            </div>
+            <canvas id="seaCanvas" aria-label="纸船过海互动游戏"></canvas>
+            <div class="sea-hud" aria-live="polite">
+              <span>岩信分<b id="seaScore">0</b></span>
+              <span>连风<b id="seaCombo">×1</b></span>
+              <span>船体<b id="seaLife">◆◆◆</b></span>
+              <span class="sea-hud__memory">乡音 / 护灯<b id="seaMemory">0/2 · ○○○</b></span>
+            </div>
+            <div class="sea-instruction" id="seaInstruction">
+              <span class="mouse-icon"><i></i></span>
+              <p>移动掌舵 · 按住左键鼓帆<br /><small>也可按住空格 · 集齐两枚乡音印</small></p>
+            </div>
+            <div class="sea-game-message" id="seaGameMessage" aria-live="polite"></div>
+            <div class="sea-energy">
+              <span>顺风蓄力 <b id="seaEnergyText">100%</b></span>
+              <i><b id="seaEnergyBar"></b></i>
+            </div>
+            <button class="sea-boost" id="seaBoost" type="button" aria-pressed="false">
+              <span>按住鼓帆</span><small>左键 / SPACE</small>
+            </button>
+            <div class="voyage-progress">
+              <span class="voyage-progress__label">航程</span>
+              <div><i id="voyageBar"></i><b class="mini-letter-boat" id="voyageBoat" aria-label="岩信纸舟"><span></span></b></div>
+              <strong id="voyagePercent">0%</strong>
+            </div>
+            <div class="sea-result" id="seaResult" role="dialog" aria-modal="false" aria-labelledby="seaResultTitle" hidden>
+              <span class="sea-result__seal" aria-hidden="true">未达</span>
+              <p>THE LETTER WAITS FOR ANOTHER WIND</p>
+              <h3 id="seaResultTitle">这一程，岩信还未抵岸</h3>
+              <div class="sea-result__stats">
+                <span>抵达海峡<b id="seaResultProgress">0%</b></span>
+                <span>留下岩信分<b id="seaResultScore">0</b></span>
+              </div>
+              <small id="seaResultHint">礁石击破了三层船体，但家书不会沉没。换一阵风，再从龙美湾启程。</small>
+              <button type="button" id="restartVoyage">重新折舟 · 再渡海峡 <i>→</i></button>
+            </div>
+            <div class="strait-arrival" id="straitArrival" aria-hidden="true">
+              <div class="strait-arrival__topline">
+                <span>LETTER ARRIVED · MINNAN HOMECOMING</span>
+                <b>海峡回信 · 001</b>
+              </div>
+              <div class="strait-arrival__route">
+                <div><small>出发</small><b>福建 · 龙美湾</b><em>24.3°N / 游子寄</em></div>
+                <i><b class="mini-letter-boat" aria-label="岩信纸舟"><span></span></b></i>
+                <div><small>抵岸</small><b>台湾海峡彼岸</b><em>乡音已认出归途</em></div>
+              </div>
+              <div class="strait-arrival__content">
+                <div>
+                  <span>一封信越过海峡，成为两岸共同的回声</span>
+                  <strong>乡音过海<br />家书抵岸</strong>
+                  <p>海峡分开两岸，月光与闽南语仍认得回家的方向。</p>
+                </div>
+                <div class="strait-arrival__receipt">
+                  <span>岩信分<b id="arrivalScore">0</b></span>
+                  <span>乡音印<b id="arrivalMemory">0 枚</b></span>
+                  <i>闽 · 台<br />同风</i>
+                </div>
+              </div>
+              <button class="strait-arrival__continue" id="arrivalContinue" type="button">让家书落成石纹 <span>→</span></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="world-panel wall-panel" id="wall" data-stage="wall">
+          <canvas class="rock-art-canvas" id="rockArtCanvas" aria-hidden="true"></canvas>
+          <div class="wall-ambient" aria-hidden="true"></div>
+          <div class="rock-art-sign" aria-hidden="true">
+            <span>LONGMEI STONE · GENERATIVE ART</span>
+            <i></i>
+            <small id="rockArtPhase">石纹漫游 · 无形</small>
+          </div>
+          <div class="wall-head">
+            <div>
+              <p class="eyebrow light">THE ETERNAL ROCK LETTERS</p>
+              <p class="chapter-no chapter-no--light">叁</p>
+              <h2>一信一纹<br />皆有回响</h2>
+              <p>纸舟抵岸，字迹凝成独一无二的石纹。输入名字，随时找回你留在海峡边的那封信。</p>
+            </div>
+            <form class="wall-search" id="wallSearchForm">
+              <label for="wallSearch">寻一封岩信</label>
+              <div>
+                <input id="wallSearch" placeholder="输入寄信人姓名" maxlength="12" />
+                <button type="submit" aria-label="搜索岩信">⌕</button>
+              </div>
+              <small>仅公开信可被检索 · 密信仅保存在你的设备</small>
+            </form>
+          </div>
+
+          <div class="wall-dashboard" aria-label="闽台游子岩信档案概览">
+            <div class="wall-dashboard__manifesto">
+              <span>MINNAN DIASPORA · LIVING ARCHIVE</span>
+              <strong>游子的去处很远<br />乡音的来处始终是家</strong>
+              <p>从龙美湾出发的当代侨批，沿着闽南人迁徙与归乡的路径，在海峡两岸留下新的民间记忆。</p>
+            </div>
+            <div class="wall-dashboard__stats">
+              <span><small>云端岩信</small><b id="wallArchiveCount">2,368</b><em>LETTERS</em></span>
+              <span><small>公开留存</small><b id="wallPublicCount">08</b><em>PUBLIC</em></span>
+              <span><small>海峡去向</small><b id="wallRouteCount">06</b><em>ROUTES</em></span>
+              <span><small>今日乡音</small><b>17</b><em>ECHOES</em></span>
+            </div>
+            <div class="wall-dashboard__routes" aria-label="家书去向分布">
+              <header><span>本期家书去向</span><small>跨海迁徙坐标</small></header>
+              <div><span>台湾本岛</span><i><b style="width: 72%"></b></i><em>38%</em></div>
+              <div><span>金门 · 澎湖</span><i><b style="width: 48%"></b></i><em>27%</em></div>
+              <div><span>闽南故乡</span><i><b style="width: 61%"></b></i><em>35%</em></div>
+            </div>
+          </div>
+
+          <div class="wall-toolbar">
+            <div class="wall-filter" role="group" aria-label="按家书去向筛选">
+              <span>按去向阅览</span>
+              <button class="is-active" type="button" data-wall-filter="all" aria-pressed="true">全部</button>
+              <button type="button" data-wall-filter="台湾" aria-pressed="false">台湾</button>
+              <button type="button" data-wall-filter="金门" aria-pressed="false">金门</button>
+              <button type="button" data-wall-filter="澎湖" aria-pressed="false">澎湖</button>
+              <button type="button" data-wall-filter="泉州" aria-pressed="false">泉州</button>
+            </div>
+            <p class="wall-result-summary" id="wallResultSummary" aria-live="polite"><span>当代岩信档案</span><b id="wallResultCount">8</b> 封公开家书</p>
+          </div>
+
+          <div class="archive-modes" aria-label="岩信档案浏览方式">
+            <span>RELATIONAL ARCHIVE</span>
+            <button class="is-active" type="button" data-archive-mode="explore" aria-pressed="true"><b>探索</b><small>流式发现 · 远近层级</small></button>
+            <button type="button" data-archive-mode="search" aria-pressed="false"><b>搜索</b><small>姓名 · 去向 · 主题</small></button>
+            <button type="button" data-archive-mode="journey" aria-pressed="false"><b>旅程</b><small>沿侨批路线阅读</small></button>
+            <p id="archiveModeHint">滚动时，远处岩信会淡出简化；靠近视线中心时，字迹与石纹逐层显影。</p>
+          </div>
+
+          <div class="rock-wall" id="rockWall" aria-label="龙美湾岩信墙">
+            <button class="rock-letter rock-letter--one" data-name="林海生" data-recipient="阿嬷" data-destination="金门">
+              <span>林海生</span><small>寄往 · 金门</small><i>「见字如面，等我回家。」</i>
+            </button>
+            <button class="rock-letter rock-letter--two" data-name="陈念" data-recipient="父亲" data-destination="厦门">
+              <span>陈念</span><small>寄往 · 厦门</small><i>「潮来潮往，平安就好。」</i>
+            </button>
+            <button class="rock-letter rock-letter--three" data-name="许安晴" data-recipient="十年后的自己" data-destination="澎湖">
+              <span>许安晴</span><small>寄往 · 澎湖</small><i>「别忘了风从哪里来。」</i>
+            </button>
+            <button class="rock-letter rock-letter--four" data-name="蔡文远" data-recipient="母亲" data-destination="台湾">
+              <span>蔡文远</span><small>寄往 · 台湾</small><i>「家中一切都好，勿念。」</i>
+            </button>
+            <button class="rock-letter rock-letter--five" data-name="苏晓帆" data-recipient="故乡" data-destination="泉州">
+              <span>苏晓帆</span><small>寄往 · 龙海</small><i>「海风很远，思念很近。」</i>
+            </button>
+            <button class="rock-letter rock-letter--six" data-name="王静云" data-recipient="姐姐" data-destination="台南 台湾">
+              <span>王静云</span><small>寄往 · 台南</small><i>「月光照两岸，平安便是回信。」</i>
+            </button>
+            <button class="rock-letter rock-letter--seven" data-name="庄海川" data-recipient="父母" data-destination="泉州">
+              <span>庄海川</span><small>寄往 · 泉州</small><i>「离家再远，乡音仍在。」</i>
+            </button>
+            <button class="rock-letter rock-letter--eight" data-name="黄月娥" data-recipient="故人" data-destination="高雄 台湾">
+              <span>黄月娥</span><small>寄往 · 高雄</small><i>「待燕归来，便是团圆。」</i>
+            </button>
+            <div class="rock-wall__empty" id="wallEmpty" hidden>
+              <span>○</span>
+              <p>这片岩壁上，还没有找到这个名字</p>
+              <button type="button" id="writeFromEmpty">去写一封</button>
+            </div>
+          </div>
+
+          <button class="archive-stream" id="expandArchive" type="button">
+            <span><i></i><i></i><i></i></span>
+            <b>继续展开世代家书长卷</b>
+            <small id="archiveStreamHint">下一组岩信正从海雾中显影 · 点击加载</small>
+          </button>
+
+          <aside class="offline-loop">
+            <div class="offline-loop__number">∞</div>
+            <div>
+              <span>FROM CLOUD TO COAST</span>
+              <h3>让云端的信，回到真实的海</h3>
+              <p>公开岩信进入文创盲盒素材库；门票与文创上的专属码，让游客随时重返这段过海旅程。</p>
+              <button class="offline-loop__sunset" id="showEnding" type="button">观看海边落日尾声 <span>→</span></button>
+            </div>
+            <div class="qr-card" aria-label="云端寄信回顾二维码示意">
+              <div class="qr-pattern" aria-hidden="true"></div>
+              <span>扫码 · 重逢</span>
+            </div>
+          </aside>
+        </section>
+      </main>
+
+      <button class="edge-arrow edge-arrow--left" id="prevStage" aria-label="上一章节">←</button>
+      <button class="edge-arrow edge-arrow--right" id="nextStage" aria-label="下一章节">→</button>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+
+    <section class="sunset-ending" id="sunsetEnding" aria-hidden="true">
+      <div class="sunset-ending__sky" aria-hidden="true"></div>
+      <button class="sunset-ending__close" id="closeEnding" type="button" aria-label="关闭尾声">×</button>
+      <div class="sunset-ending__copy">
+        <p>THE TIDE BRINGS EVERY LETTER HOME</p>
+        <h2>落日把海染成一封信<br /><em>游子与故乡，隔海仍同心</em></h2>
+        <span>紫天、金沙、龙美湾。海浪信使与岩笺在这里目送每一封家书，越过台湾海峡。</span>
+      </div>
+      <div class="sunset-ending__duo"><img src="assets/ip-messenger-v2.webp" alt="海浪信使" loading="lazy" decoding="async" /><img src="assets/ip-rockletter-v2-optimized.png" alt="岩笺" loading="lazy" decoding="async" /></div>
+      <div class="sunset-ending__logos" aria-label="合作标识定格画面">
+        <div class="ending-logo ending-logo--main"><b>龍美灣</b><span>闽台之滨</span></div><i></i>
+        <div class="ending-logo"><b>華禮</b><span>文化创意</span></div><i></i>
+        <div class="ending-logo"><b>華師</b><span>文化共创</span></div>
+      </div>
+      <button class="sunset-ending__restart" id="restartJourney" type="button">重新沿海出发 ↗</button>
+    </section>
+
+    <div class="modal poster-modal" id="posterModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="poster-dialog" role="dialog" aria-modal="true" aria-labelledby="posterTitle">
+        <button class="modal-close" data-close-modal aria-label="关闭">×</button>
+        <div class="poster-preview">
+          <canvas id="posterCanvas" width="1080" height="1440"></canvas>
+          <span class="poster-loading" id="posterLoading">正在让字迹生出岩纹…</span>
+        </div>
+        <div class="poster-copy">
+          <p class="eyebrow">YOUR ROCK LETTER</p>
+          <span class="success-mark">✓</span>
+          <h2 id="posterTitle">岩纹已成，家书已封</h2>
+          <p>每封信会生成一枚独有岩纹。保存海报分享，让思念沿着朋友圈继续远行。</p>
+          <div class="poster-tags">
+            <span>个人手写字迹</span><span>龙美湾石纹</span><span>海峡邮戳</span>
+          </div>
+          <div class="poster-action-feedback" id="posterActionFeedback" data-state="ready" role="status" aria-live="polite">
+            <i>01</i>
+            <span><b id="posterFeedbackTitle">海报已生成，可以保存或分享</b><small id="posterFeedbackDetail">完成后，继续让信笺化为纸舟</small></span>
+          </div>
+          <button class="primary-button full-button" id="savePoster">保存岩信海报 <i>↓</i></button>
+          <button class="outline-button full-button" id="sharePoster">分享给想念的人 <i>↗</i></button>
+          <button class="text-button poster-next-button" id="releaseBoat">下一步 · 让信笺化舟，启程过海 →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal letter-detail-modal" id="letterDetailModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-detail></div>
+      <article class="detail-letter detail-letter--curated" role="dialog" aria-modal="true" aria-labelledby="detailName">
+        <button class="modal-close" data-close-detail aria-label="关闭">×</button>
+        <div class="detail-specimen" id="detailSpecimen" aria-label="可交互查看的岩纹标本">
+          <div class="detail-specimen__rock"><i></i><i></i><i></i><span>岩</span></div>
+          <p><b>拖动查看岩纹</b><small>POINTER / TOUCH · 360°</small></p>
+          <div class="detail-specimen__meta"><span>纹理层级 <b>04</b></span><span>显影精度 <b>92%</b></span><span>海峡坐标 <b>24.3°N</b></span></div>
+        </div>
+        <div class="detail-letter__content">
+          <span class="detail-letter__seal">岩</span>
+          <p>龙美湾 · 当代侨批 · 关系型档案</p>
+          <h2 id="detailName">寄信人</h2>
+          <small id="detailRoute">寄往</small>
+          <div class="detail-taxonomy"><span id="detailTheme">思乡</span><span id="detailEmotion">牵挂</span><span id="detailMaterial">龙美湾岩纹</span></div>
+          <blockquote id="detailMessage"></blockquote>
+          <div class="detail-actions">
+            <button type="button" id="collectLetter"><span>＋</span><b>收藏到我的家书盒</b></button>
+            <button type="button" id="shareLetterLink"><span>↗</span><b>复制专属调阅链接</b></button>
+          </div>
+          <section class="related-letters" aria-label="关联岩信">
+            <header><span>RELATED LETTERS</span><b>沿着情感与去向继续阅读</b></header>
+            <div id="relatedLetters"></div>
+          </section>
+          <footer>此信已化作海峡边的一道石纹 · 原始文字完整留存</footer>
+        </div>
+      </article>
+    </div>
+
+    <aside class="gallery-drawer" id="galleryDrawer" aria-hidden="true">
+      <button class="gallery-drawer__backdrop" data-close-gallery aria-label="关闭家书盒"></button>
+      <section>
+        <header><span>MY ROCK-LETTER SHOEBOX</span><button type="button" data-close-gallery aria-label="关闭">×</button></header>
+        <div class="gallery-drawer__title"><p>我的家书盒</p><h2>把相遇过的岩信<br />装进一只随身信匣</h2><small>无需登录，收藏保存在当前设备；每封信都可生成专属调阅链接。</small></div>
+        <div class="gallery-list" id="galleryList"></div>
+        <div class="gallery-empty" id="galleryEmpty"><span>▱</span><p>家书盒还是空的<br /><small>在岩壁打开一封信，点击“收藏”</small></p></div>
+        <footer><b id="galleryFooterCount">0 封岩信</b><button type="button" id="shareGallery">分享我的策展清单 ↗</button></footer>
+      </section>
+    </aside>
+
+  <script src="app.js?v=20260818c"></script>
+  </body>
+</html>
